@@ -1,0 +1,32 @@
+* C:\Users\pache\OneDrive\Documents\OpenSuperHet\LtSpice\State_Variable_Filter_NoAmpFeedback.asc
+XU1 N010 N002 N001 N014 N009 OPA132 OPA132 OPA132
+XU2 0 N005 N001 N014 N011 OPA132 OPA132 OPA132
+XU3 0 N006 N001 N014 N003 OPA132 OPA132 OPA132
+XU4 0 N012 N001 N014 N013 OPA132 OPA132 OPA132
+R1 N010 N008 {myQ}
+V2 N001 0 5
+V3 0 N014 5
+R2 N005 N009 {R_s}
+R3 N006 N011 {R_s}
+C1 N011 N005 {C_s}
+C2 N003 N006 {C_s}
+R4 N011 N010 {myQ}
+R5 N003 N002 {R_s}
+R6 N002 N009 {R_s}
+R7 N012 N011 {R_s}
+R8 N013 N012 {5*R_s}
+XU5 0 N004 N001 N014 N008 OPA132 OPA132 OPA132
+R9 N004 N007 {R_s}
+R10 N008 N004 {5*R_s}
+V1 N007 0 AC .5
+.ac dec 100 1 600e6
+.step param fc list 150 600 180000 4k
+.param W=2*fc*3.1415926535
+.param scale = 1k
+.param R_s = scale
+.param myQ=scale*fc/BW
+.param BW = 150
+.param C_s = 1/{scale*W}
+.lib opa132.lib
+.backanno
+.end
